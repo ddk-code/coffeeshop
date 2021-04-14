@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class BD {
     private static int id;
-    private static ArrayList<User> users;
+    final private static ArrayList<User> users = new ArrayList<>();
 
     public static String addUser(User user) {
         if (!isUserExist(user.getLogin())) {
@@ -17,11 +17,15 @@ public class BD {
     }
 
     private static boolean isUserExist(String login) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getLogin().equals(login)) {
+        for (User user : users) {
+            if (user.getLogin().equals(login)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static ArrayList<User> getUsers() {
+        return users;
     }
 }
